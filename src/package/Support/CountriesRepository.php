@@ -1,9 +1,9 @@
 <?php
 
-namespace PragmaRX\Countries\Support;
+namespace PragmaRX\Countries\Package\Support;
 
-use PragmaRX\Countries\Service;
 use MLD\Converter\JsonConverter;
+use PragmaRX\Countries\Package\Service;
 
 class CountriesRepository
 {
@@ -31,7 +31,7 @@ class CountriesRepository
     /**
      * Cache instance.
      *
-     * @var \PragmaRX\Countries\Support\Cache
+     * @var \PragmaRX\Countries\Package\Support\Cache
      */
     public $cache;
 
@@ -131,11 +131,7 @@ class CountriesRepository
     public function getStatesJson($country)
     {
         $file = $this->getHomeDir().
-            DIRECTORY_SEPARATOR.
-            'data'.
-            DIRECTORY_SEPARATOR.
-            'states'.
-            DIRECTORY_SEPARATOR.
+            _dir('/data/states/').
             strtolower($country['cca3']).'.json';
 
         if (file_exists($file)) {
@@ -167,11 +163,7 @@ class CountriesRepository
     public function loadCountriesJson()
     {
         return $this->readFile(
-            $this->getJsonConverterHomeDir().
-            DIRECTORY_SEPARATOR.
-            'dist'.
-            DIRECTORY_SEPARATOR.
-            'countries.json'
+            $this->getJsonConverterHomeDir()._dir('/dist/countries.json')
         );
     }
 
@@ -183,11 +175,7 @@ class CountriesRepository
     public function loadTimezonesJson()
     {
         return $this->readFile(
-            $this->getHomeDir().
-            DIRECTORY_SEPARATOR.
-            'data'.
-            DIRECTORY_SEPARATOR.
-            'timezones.json'
+            $this->getHomeDir()._dir('/data/timezones.json')
         );
     }
 
@@ -258,9 +246,7 @@ class CountriesRepository
     {
         return file_get_contents(
             $this->getJsonConverterHomeDir().
-            DIRECTORY_SEPARATOR.
-            'data'.
-            DIRECTORY_SEPARATOR.
+            _dir('/data/').
             strtolower($country).'.svg'
         );
     }
@@ -275,9 +261,7 @@ class CountriesRepository
     {
         return file_get_contents(
             $this->getJsonConverterHomeDir().
-            DIRECTORY_SEPARATOR.
-            'data'.
-            DIRECTORY_SEPARATOR.
+            _dir('/data/').
             strtolower($country['cca3']).'.geo.json'
         );
     }
@@ -292,9 +276,7 @@ class CountriesRepository
     {
         return file_get_contents(
             $this->getJsonConverterHomeDir().
-            DIRECTORY_SEPARATOR.
-            'data'.
-            DIRECTORY_SEPARATOR.
+            _dir('/data/').
             strtolower($country['cca3']).'.geo.json'
         );
     }
